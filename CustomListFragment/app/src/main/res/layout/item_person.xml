@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:minWidth="400dp"
+              android:orientation="vertical"
+              android:gravity="center_vertical"
+              android:background="#ffff" >
+
+    <!-- NAME -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical"
+                  android:background="#ffff" >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/name_title"
+                android:textColor="@android:color/black"
+                android:gravity="center" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/item_person_name"
+                android:gravity="center" />
+    </LinearLayout>
+
+    <!-- AGE -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:minWidth="400dp"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical"
+                  android:background="#ffff" >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginEnd="3dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/age_title"
+                android:gravity="center" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/item_person_age"
+                android:gravity="center" />
+    </LinearLayout>
+
+    <!-- CITY -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:minWidth="400dp"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical"
+                  android:background="#ffff" >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/city_title"
+                android:gravity="center" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/item_person_city"
+                android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/darker_gray"/>
+
+</LinearLayout>

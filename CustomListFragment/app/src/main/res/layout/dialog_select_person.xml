@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:minWidth="400dp"
+              android:orientation="vertical"
+              android:background="#ffff" >
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/central_list"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lv_person_list"/>
+
+</LinearLayout>
