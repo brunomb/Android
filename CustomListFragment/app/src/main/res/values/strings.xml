@@ -4,6 +4,7 @@
     <string name="age_title">Age:</string>
     <string name="city_title">City:</string>
     <string name="bt_select_person">Select</string>
+    <string name="bt_select_person_radio_button">Select With Radio Buttons</string>
     <string name="central_list">Persons</string>
 </resources>
 

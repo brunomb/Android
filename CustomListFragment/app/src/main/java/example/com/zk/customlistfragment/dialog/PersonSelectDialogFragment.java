@@ -13,7 +13,7 @@ import example.com.zk.customlistfragment.listener.OnPersonClickListener;
 public class PersonSelectDialogFragment extends DialogFragment{
 
     public PersonSelectDialogFragment() {}
-    private ListView personList;
+
     private static PersonItemAdapter mData;
     
     public static PersonSelectDialogFragment newInstance(PersonItemAdapter data) {
@@ -29,9 +29,9 @@ public class PersonSelectDialogFragment extends DialogFragment{
 
         setRetainInstance(true);
         View rootView = inflater.inflate(R.layout.dialog_select_person, container, false);
-        personList = (ListView) rootView.findViewById(R.id.lv_person_list);
+        ListView personList = (ListView) rootView.findViewById(R.id.lv_person_list);
         personList.setAdapter(mData);
-        personList.setOnItemClickListener(new OnPersonClickListener());
+        //personList.setOnItemClickListener(new OnPersonClickListener());
         return rootView;
     }
 

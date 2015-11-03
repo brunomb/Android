@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         this.registerReceiver(mReceiver, filter);
 
         populatePerson();
-        personAdapter = new PersonItemAdapter(this,R.layout.item_person,persons);
+        personAdapter = new PersonItemAdapter(this,R.layout.item_person_radio,persons);
 
         btSelectDialog.setOnClickListener(new View.OnClickListener() {
             @Override

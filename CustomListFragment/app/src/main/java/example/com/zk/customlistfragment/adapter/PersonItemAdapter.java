@@ -2,18 +2,23 @@ package example.com.zk.customlistfragment.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import example.com.zk.customlistfragment.R;
+import example.com.zk.customlistfragment.activity.CustomRadioButton;
 
 public class PersonItemAdapter extends ArrayAdapter<String[]> {
 
     private Context mContext;
     private String[][] persons;
     private int mLayoutResourceId;
+    private static int mSelectedVariation = -1;
 
     public PersonItemAdapter(Context context, int resource, String[][] objects) {
         super(context, resource, objects);
@@ -23,7 +28,7 @@ public class PersonItemAdapter extends ArrayAdapter<String[]> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if(convertView==null){
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
@@ -31,6 +36,22 @@ public class PersonItemAdapter extends ArrayAdapter<String[]> {
         }
 
         String[] person = persons[position];
+
+        RadioButton radio = (RadioButton) convertView.findViewById(R.id.radioButton);
+
+        if (position == mSelectedVariation) {
+            radio.setChecked(true);
+        } else {
+            radio.setChecked(false);
+        }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSelectedVariation = position;
+                PersonItemAdapter.this.notifyDataSetChanged();
+            }
+        });
 
         TextView textViewName = (TextView) convertView.findViewById(R.id.item_person_name);
         textViewName.setText(person[0]);
