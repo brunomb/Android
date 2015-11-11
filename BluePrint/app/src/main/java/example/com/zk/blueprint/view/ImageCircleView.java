@@ -22,28 +22,12 @@ public class ImageCircleView extends ImageView {
         super(context);
     }
 
-    public ImageCircleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        circlePaint = new Paint();
-        //get the attributes specified in attrs.xml using the name we included
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.LovelyView, 0, 0);
-
-        try {
-            //get the text and colors specified using the names in attrs.xml
-            circleText = a.getString(R.styleable.LovelyView_circleLabel);
-            circleCol = a.getInteger(R.styleable.LovelyView_circleColor, 0);
-            labelCol = a.getInteger(R.styleable.LovelyView_labelColor, 0);
-        } finally {
-            a.recycle();
-        }
-    }
-
     public ImageCircleView(Context context,  float x, float y, int color1, int color2) {
         super(context);
         Log.i("NEW CIRCLE CREATED", "NEW CIRCLE CREATED " + x + ", " + y);
         setMX(x);
         setMY(y);
+        circlePaint = new Paint();
         circleText = "1";
         circleCol = color1;
         labelCol = color2;
@@ -52,6 +36,21 @@ public class ImageCircleView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setAntiAlias(true);
+        //set the paint color using the circle color specified
+        circlePaint.setColor(circleCol);
+
+        Log.i("DRAW: ", " " + getMX() + ", " + getMY() + "<--");
+        //set the text color using the color specified
+        circlePaint.setColor(labelCol);
+
+        //set text properties
+        circlePaint.setTextAlign(Paint.Align.CENTER);
+        circlePaint.setTextSize(500);
+
+        //draw the text using the string attribute and chosen properties
+        canvas.drawText(circleText, mX, mY + 8, circlePaint);
     }
 
     public float getMX(){
