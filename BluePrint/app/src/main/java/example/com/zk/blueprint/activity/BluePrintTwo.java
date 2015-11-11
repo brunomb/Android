@@ -1,6 +1,7 @@
 package example.com.zk.blueprint.activity;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import example.com.zk.blueprint.view.CircleView;
 import example.com.zk.blueprint.view.ImageCircleView;
 import example.com.zk.blureprint.R;
@@ -43,7 +43,9 @@ public class BluePrintTwo extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (count <= 10) {
                         ImageCircleView c = new ImageCircleView(mContext, event.getX(), event.getY(), getResources().getColor(R.color.black), getResources().getColor(R.color.red));
-                        c.setBackground(getResources().getDrawable(R.drawable.zone_green));
+                        Drawable d = getResources().getDrawable(R.drawable.zone_green);
+                        int n = d.getIntrinsicWidth()/2;
+                        c.setBackground(d);
                         c.setTag("ZONE " + count);
                         ArrayList<View> textos = new ArrayList<>(1);
                         TextView tv = new TextView(BluePrintTwo.this);
@@ -51,7 +53,7 @@ public class BluePrintTwo extends AppCompatActivity {
                         textos.add(tv);
                         c.addChildrenForAccessibility(textos);
                         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
-                        params.setMargins((int) event.getX(), (int) event.getY(), 0, 0);
+                        params.setMargins((int) event.getX() - n, (int) event.getY() -n, 0, 0);
                         c.setLayoutParams(params);
                         Log.d(">>>> CTAG", c.getTag() + "");
                         c.setOnClickListener(new View.OnClickListener() {
