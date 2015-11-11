@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BlurePrint</string>
+    <string name="main_screen_title">Blue Print Example</string>
+    <string name="bt_title_one">Example One</string>
+</resources>
