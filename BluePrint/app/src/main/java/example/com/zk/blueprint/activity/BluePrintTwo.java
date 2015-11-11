@@ -1,0 +1,66 @@
+package example.com.zk.blueprint.activity;
+
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.FrameLayout;
+import example.com.zk.blueprint.view.CircleView;
+import example.com.zk.blueprint.view.ImageCircleView;
+import example.com.zk.blureprint.R;
+
+import java.util.ArrayList;
+
+public class BluePrintTwo extends AppCompatActivity {
+
+    private Context mContext;
+    private ArrayList<CircleView> circles;
+    private FrameLayout bluePrint;
+    int count = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_blue_print_two);
+        mContext = this;
+        bluePrint = (FrameLayout) findViewById(R.id.blue_print_bg);
+        bluePrint.setTag("blue_print");
+
+        circles = new ArrayList<>();
+
+        bluePrint.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (count <= 10) {
+                        ImageCircleView c = new ImageCircleView(mContext, event.getX(), event.getY(), getResources().getColor(R.color.black), getResources().getColor(R.color.red));
+                        c.setBackground(getResources().getDrawable(R.drawable.zone_green));
+                        c.setTag("ZONE " + count);
+
+                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins((int) event.getX(), (int) event.getY(),0,0);
+                        c.setLayoutParams(params);
+
+                        c.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v2) {
+                                Log.e(">>>>", v2.getTag() +"");
+                            }
+                        });
+
+                        Log.i("Event", "" + event.getX() + ", " + event.getY());
+                        Log.i("Size", circles.size() + " <");
+                        bluePrint.addView(c);
+                        count++;
+                    }
+                }
+                Log.i(">>>>>>>>>>>>>>>>>>>>>>", v.getTag() + " <");
+                return true;
+            }
+        });
+    }
+
+
+}

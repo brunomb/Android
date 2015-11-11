@@ -50,6 +50,12 @@ public class CircleView extends View{
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.e(">>>>>", widthMeasureSpec + ", " + heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         //draw the View
         //get half of the width and height as we are working with a circle

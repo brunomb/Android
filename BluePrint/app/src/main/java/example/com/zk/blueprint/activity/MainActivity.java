@@ -25,5 +25,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Intent intent2 = new Intent(this, BluePrintTwo.class);
+
+        Button btBluePrintExampleTwo = (Button) findViewById(R.id.bt_example_two);
+
+        btBluePrintExampleTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent2);
+            }
+        });
+
     }
 }

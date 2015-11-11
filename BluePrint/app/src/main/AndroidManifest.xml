@@ -17,6 +17,8 @@
         </activity>
         <activity android:name="example.com.zk.blueprint.activity.BluePrintOne" >
         </activity>
+        <activity android:name="example.com.zk.blueprint.activity.BluePrintTwo" >
+        </activity>
     </application>
 
 </manifest>

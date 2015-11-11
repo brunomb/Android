@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import example.com.zk.blueprint.view.CircleView;
 import example.com.zk.blureprint.R;
 
@@ -24,6 +25,7 @@ public class BluePrintOne extends AppCompatActivity {
         setContentView(R.layout.activity_blue_print_one);
         mContext = this;
         bluePrint  = (FrameLayout) findViewById(R.id.blue_print_bg);
+        bluePrint.setTag("blue_print");
 
         circles = new ArrayList<>();
 
@@ -33,26 +35,14 @@ public class BluePrintOne extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     Log.i(">>>>>>>>>>>>>>>>>>>>>>", v.getTag() + " <");
 
-                    CircleView c = new CircleView(mContext, event.getX(), event.getY(), getResources().getColor(R.color.black),getResources().getColor(R.color.red));
+                    CircleView c = new CircleView(mContext, event.getX(), event.getY(), getResources().getColor(R.color.black), getResources().getColor(R.color.red));
                     c.setTag("ZONE 1");
-
                     Log.i("Event", "" + event.getX() + ", " + event.getY());
                     Log.i("Size", circles.size() + " <");
                     bluePrint.addView(c);
-//                    circles.add(c);
-//                    showCircles();
                 }
                 return true;
             }
         });
-    }
-
-    public void showCircles() {
-        bluePrint.removeAllViews();
-        for (CircleView c : circles){
-            bluePrint.removeView(c);
-//            Log.i("ID: ", " " + c.getId());
-            bluePrint.addView(c);
-        }
     }
 }
