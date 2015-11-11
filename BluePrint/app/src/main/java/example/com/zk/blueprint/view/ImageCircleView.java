@@ -18,12 +18,20 @@ public class ImageCircleView extends ImageView {
     private float mX;
     private float mY;
 
+    //1 is for Potrait and 2 for Landscape.
+    private int initialOrientation;
+
     public ImageCircleView(Context context) {
         super(context);
+        //1 is for Potrait and 2 for Landscape.
+        initialOrientation = getResources().getConfiguration().orientation;
     }
 
     public ImageCircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        //1 is for Potrait and 2 for Landscape.
+        initialOrientation = getResources().getConfiguration().orientation;
 
         circlePaint = new Paint();
         //get the attributes specified in attrs.xml using the name we included
@@ -37,6 +45,10 @@ public class ImageCircleView extends ImageView {
         } finally {
             a.recycle();
         }
+    }
+
+    public int getInitialOrientation() {
+        return this.initialOrientation;
     }
 
     public ImageCircleView(Context context,  float x, float y, int color1, int color2) {
