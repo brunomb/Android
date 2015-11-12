@@ -51,6 +51,10 @@ public class ImageCircleView extends ImageView {
         return this.initialOrientation;
     }
 
+    public void setInitialOrientation(int initialOrientation) {
+        this.initialOrientation = initialOrientation;
+    }
+
     public ImageCircleView(Context context,  float x, float y, int color1, int color2) {
         super(context);
         Log.i("NEW CIRCLE CREATED", "NEW CIRCLE CREATED " + x + ", " + y);

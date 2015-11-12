@@ -5,10 +5,13 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import example.com.zk.blueprint.view.CircleView;
 import example.com.zk.blueprint.view.ImageCircleView;
@@ -23,6 +26,9 @@ public class BluePrintTwo extends AppCompatActivity {
     private FrameLayout bluePrint;
     static int count = 0;
     static ArrayList<View> views = new ArrayList<>();
+    static Integer blueprintHeight;
+    static Integer blueprintWidth;
+    static Integer initialOrientation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,7 @@ public class BluePrintTwo extends AppCompatActivity {
                     if (count <= 10) {
                         ImageCircleView c = new ImageCircleView(mContext, event.getX(), event.getY(), getResources().getColor(R.color.black), getResources().getColor(R.color.red));
                         Drawable d = getResources().getDrawable(R.drawable.zone_green);
-                        int n = d.getIntrinsicWidth()/2;
+                        int n = d.getIntrinsicWidth() / 2;
                         c.setBackground(d);
                         c.setTag("ZONE " + count);
                         ArrayList<View> textos = new ArrayList<>(1);
@@ -52,8 +58,8 @@ public class BluePrintTwo extends AppCompatActivity {
                         tv.setText("ZONE " + count);
                         textos.add(tv);
                         c.addChildrenForAccessibility(textos);
-                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
-                        params.setMargins((int) event.getX() - n, (int) event.getY() -n, 0, 0);
+                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins((int) event.getX() - n, (int) event.getY() - n, 0, 0);
                         c.setLayoutParams(params);
                         Log.d(">>>> CTAG", c.getTag() + "");
                         c.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +69,7 @@ public class BluePrintTwo extends AppCompatActivity {
                             }
                         });
 
+                        c.setInitialOrientation(getResources().getConfiguration().orientation);
                         Log.i("Event", "" + event.getX() + ", " + event.getY());
                         Log.i("Initial Orientation", "" + c.getInitialOrientation());
                         Log.i("Size", circles.size() + " <");
@@ -76,6 +83,33 @@ public class BluePrintTwo extends AppCompatActivity {
                 return true;
             }
         });
+
+        ViewTreeObserver vto = bluePrint.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                bluePrint.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                int width = bluePrint.getMeasuredWidth();
+                int height = bluePrint.getMeasuredHeight();
+                if(blueprintHeight == null && blueprintWidth == null) {
+                    blueprintHeight = height;
+                    blueprintWidth = width;
+                } else {
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    if(getResources().getConfiguration().orientation == initialOrientation) {
+                        params.width = blueprintWidth;
+                        params.height = blueprintHeight;
+                    } else {
+                        params.width = blueprintWidth;
+                        params.height = blueprintHeight;
+                    }
+
+                    bluePrint.setLayoutParams(params);
+                }
+                Log.d("Blueprint - ", "Heigth:" + blueprintHeight+" --- Width:" + blueprintWidth);
+            }
+        });
+
     }
 
 
@@ -84,6 +118,9 @@ public class BluePrintTwo extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        if(initialOrientation == null) {
+            initialOrientation = getResources().getConfiguration().orientation;
+        }
         bluePrint.removeAllViewsInLayout();
         if(views != null && !views.isEmpty()) {
             for(View aView : views) {
