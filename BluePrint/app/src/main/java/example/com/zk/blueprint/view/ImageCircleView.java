@@ -1,14 +1,11 @@
 package example.com.zk.blueprint.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
-import example.com.zk.blureprint.R;
 
 public class ImageCircleView extends ImageView {
 
@@ -36,21 +33,6 @@ public class ImageCircleView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        circlePaint.setStyle(Paint.Style.FILL);
-        circlePaint.setAntiAlias(true);
-        //set the paint color using the circle color specified
-        circlePaint.setColor(circleCol);
-
-        Log.i("DRAW: ", " " + getMX() + ", " + getMY() + "<--");
-        //set the text color using the color specified
-        circlePaint.setColor(labelCol);
-
-        //set text properties
-        circlePaint.setTextAlign(Paint.Align.CENTER);
-        circlePaint.setTextSize(500);
-
-        //draw the text using the string attribute and chosen properties
-        canvas.drawText(circleText, mX, mY + 8, circlePaint);
     }
 
     public float getMX(){

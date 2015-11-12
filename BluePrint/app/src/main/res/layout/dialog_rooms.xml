@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:minWidth="400dp"
+              android:orientation="horizontal"
+              android:background="#ffff" >
+
+    <!--RESULT-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_height="fill_parent"
+                  android:layout_width="fill_parent"
+                  android:id="@+id/search_result"
+                  android:orientation="vertical" >
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/central_list_title"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="20dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/add_rooms_title"
+                android:gravity="center" />
+
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_above="@+id/lv_search_results"
+                android:background="@color/divider"/>
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_below="@+id/central_list_title"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:id="@+id/lv_search_results"
+                android:layout_above="@+id/button_ok"/>
+
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/lv_search_results"
+                android:background="@color/divider"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:id="@+id/button_ok"
+                android:adjustViewBounds="false"
+                android:baselineAligned="false"
+                android:minWidth="64dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:text="@string/dialog_ok"
+                android:textColor="@color/action"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:id="@+id/button_cancel"
+                android:minWidth="64dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_below="@+id/lv_search_results"
+                android:layout_toStartOf="@+id/button_ok"
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="false"
+                android:baselineAligned="false"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/action" />
+    </RelativeLayout>
+
+</LinearLayout>

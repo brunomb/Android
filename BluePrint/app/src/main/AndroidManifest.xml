@@ -18,6 +18,9 @@
         <activity android:name="example.com.zk.blueprint.activity.BluePrintOne" >
         </activity>
         <activity android:name="example.com.zk.blueprint.activity.BluePrintTwo" >
+            <intent-filter>
+                <action android:name="example.com.zk.ROOM_SELECTED" />
+            </intent-filter>
         </activity>
     </application>
 

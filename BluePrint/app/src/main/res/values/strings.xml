@@ -3,4 +3,11 @@
     <string name="main_screen_title">Blue Print Example</string>
     <string name="bt_title_one">Example One</string>
     <string name="bt_title_two">Example Two</string>
+    <string name="add_rooms_title">Rooms</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_ok">OK</string>
+    <string name="room_name">Name: </string>
+    <string name="room_number">Number: </string>
+    <string name="room_status">Status: </string>
+    <string name="fiding_rooms">Finding Rooms</string>
 </resources>
