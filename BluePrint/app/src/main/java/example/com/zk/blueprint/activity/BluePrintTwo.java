@@ -9,9 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import example.com.zk.blueprint.adapter.RoomResult;
 import example.com.zk.blueprint.adapter.RoomsAdapter;
@@ -34,20 +38,29 @@ public class BluePrintTwo extends AppCompatActivity {
     private RoomsDialogs roomsDialog;
     private static RoomsAdapter roomsAdapter;
     private FrameLayout bluePrint;
+    static int count = 0;
+    static ArrayList<View> views = new ArrayList<>();
+    static Integer blueprintHeight;
+    static Integer blueprintWidth;
+    static Integer initialOrientation;
+    static Integer activityHeight;
+    static Integer activityWidth;
+    private RelativeLayout activityLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blue_print_two);
+        activityLayout = (RelativeLayout) findViewById(R.id.activity);
         mContext = this;
 
         bluePrint = (FrameLayout) findViewById(R.id.blue_print_bg);
         bluePrint.setTag("blue_print");
 
-        RoomPoint rp1 = new RoomPoint("Room 01","1");
-        RoomPoint rp2 = new RoomPoint("Room 13","13");
-        RoomPoint rp3 = new RoomPoint("Room 20","20");
-        RoomPoint rp4 = new RoomPoint("Room 42","42");
+        RoomPoint rp1 = new RoomPoint("Room 01", "1");
+        RoomPoint rp2 = new RoomPoint("Room 13", "13");
+        RoomPoint rp3 = new RoomPoint("Room 20", "20");
+        RoomPoint rp4 = new RoomPoint("Room 42", "42");
         rp1.setStatus(RoomStatus.EMPTY);
         rp2.setStatus(RoomStatus.CLEAN);
         rp3.setStatus(RoomStatus.BUSY);
@@ -62,6 +75,7 @@ public class BluePrintTwo extends AppCompatActivity {
         this.registerReceiver(mReceiver, filter);
 
         circles = new ArrayList<>();
+
 
         bluePrint.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -130,6 +144,62 @@ public class BluePrintTwo extends AppCompatActivity {
                 return true;
             }
         });
+
+        ViewTreeObserver vtoActivity = activityLayout.getViewTreeObserver();
+        vtoActivity.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                activityLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                int width = activityLayout.getMeasuredWidth();
+                int height = activityLayout.getMeasuredHeight();
+                if (activityHeight == null && activityWidth == null) {
+                    if (getResources().getConfiguration().orientation == initialOrientation) {
+                        activityHeight = height;
+                        activityWidth = width;
+                    } else {
+                        activityHeight = width;
+                        activityWidth = height;
+                    }
+                } else {
+//                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                    params.width = blueprintWidth;
+//                    params.height = blueprintHeight;
+//
+//
+//                    activityLayout.setLayoutParams(params);
+                }
+                Log.d("ActivityLayout - ", "Heigth:" + activityHeight + " --- Width:" + activityWidth);
+            }
+        });
+
+
+        ViewTreeObserver vto = bluePrint.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                bluePrint.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                int width = bluePrint.getMeasuredWidth();
+                int height = bluePrint.getMeasuredHeight();
+                if (blueprintHeight == null && blueprintWidth == null) {
+                    if (getResources().getConfiguration().orientation == initialOrientation) {
+                        blueprintHeight = height;
+                        blueprintWidth = width;
+                    } else {
+                        blueprintHeight = width;
+                        blueprintWidth = height;
+                    }
+                } else {
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.width = blueprintWidth;
+                    params.height = blueprintHeight;
+
+
+                    bluePrint.setLayoutParams(params);
+                }
+                Log.d("Blueprint - ", "Heigth:" + blueprintHeight + " --- Width:" + blueprintWidth);
+            }
+        });
+
     }
 
     private void createRooms() {
@@ -145,11 +215,10 @@ public class BluePrintTwo extends AppCompatActivity {
     private class Receiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context arg0, Intent arg1) {
-            Log.i("> > > > >","< < < < <");
+            Log.i("> > > > >", "< < < < <");
             String selectedName = arg1.getStringExtra("SELECTED_ROOM_NAME");
             int selectedX = arg1.getIntExtra("SELECTED_ROOM_X", 0);
             int selectedY = arg1.getIntExtra("SELECTED_ROOM_Y", 0);
-
             drawPoint(selectedName, selectedX, selectedY);
         }
     }
@@ -181,7 +250,7 @@ public class BluePrintTwo extends AppCompatActivity {
                         break;
                 }
 
-                int n = d.getIntrinsicWidth()/2;
+                int n = d.getIntrinsicWidth() / 2;
                 c.setBackground(d);
                 c.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                 c.setTextColor(getResources().getColor(R.color.white));
@@ -189,9 +258,10 @@ public class BluePrintTwo extends AppCompatActivity {
                 c.setText(room.getNumber());
                 c.setTag(room.getId());
 
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,FrameLayout.LayoutParams.WRAP_CONTENT);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins((int) room.getPositionX() - n, (int) room.getPositionY() - n, 0, 0);
                 c.setLayoutParams(params);
+                views.add(c);
 
                 c.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -202,6 +272,26 @@ public class BluePrintTwo extends AppCompatActivity {
                 bluePrint.addView(c);
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (initialOrientation == null) {
+            initialOrientation = getResources().getConfiguration().orientation;
+        }
+        bluePrint.removeAllViewsInLayout();
+        if (views != null && !views.isEmpty()) {
+            for (View aView : views) {
+                Log.d("OnStart", "" + aView.getTag());
+                ((FrameLayout) aView.getParent())
+                        .removeView(aView);
+
+                bluePrint.addView(aView);
+            }
+        }
+        Log.d("ORIENTATION:", "" + getResources().getConfiguration().orientation);
     }
 }
 

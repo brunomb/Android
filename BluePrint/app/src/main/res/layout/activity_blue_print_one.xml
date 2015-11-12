@@ -11,10 +11,12 @@
         tools:context="example.com.zk.blueprint.activity.BluePrintOne">
 
         <FrameLayout
-                android:background="@android:color/holo_blue_bright"
+                android:background="@drawable/planta"
                 android:id="@+id/blue_print_bg"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+            >
 
         </FrameLayout>
 
