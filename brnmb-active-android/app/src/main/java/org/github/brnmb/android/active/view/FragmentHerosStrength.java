@@ -1,24 +1,23 @@
-package org.github.brnmb.android.active;
+package org.github.brnmb.android.active.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import org.github.brnmb.android.active.R;
 
+public class FragmentHerosStrength extends Fragment {
 
-public class FragmentOne extends Fragment {
     public static Fragment newInstance(Context context) {
-        FragmentOne f = new FragmentOne();
-
-        return f;
+        return new FragmentHerosStrength();
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_one, null);
-        return root;
+        return inflater.inflate(R.layout.fragment_heros_strength, null);
     }
 }

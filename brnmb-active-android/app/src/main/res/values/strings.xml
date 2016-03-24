@@ -8,4 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="agility_heros">Agility Heros</string>
+    <string name="intelligence_heros">Intelligence Heros</string>
+    <string name="strength_heros">Strength Heros</string>
 </resources>
