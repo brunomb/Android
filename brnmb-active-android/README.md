@@ -9,3 +9,11 @@ Uses
 The following libs and framework are used.
 
 * [ActiveAndroid](https://github.com/pardom/ActiveAndroid)
+
+Pretend to use
+-------
+
+The following libs and framework are used.
+
+* [ButterKnife](http://jakewharton.github.io/butterknife/)
+* [TedMosby](http://hannesdorfmann.com/android/mosby)
