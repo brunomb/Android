@@ -5,13 +5,25 @@
              android:background="#cc0000"
              tools:context=".view.FragmentHerosStrength">
 
-    <TextView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/strength_heros"/>
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/tv_heros_strength_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="3dp"
+                android:text="@string/strength_heros"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_heros_strength_title"
+                android:id="@+id/strength_hero_rv" />
+    </RelativeLayout>
 
 </FrameLayout>

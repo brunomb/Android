@@ -1,5 +1,6 @@
 package org.github.brnmb.android.active.model;
 
+import android.util.Log;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -61,7 +62,10 @@ public class HeroAttribute extends Model {
      *
      * @return List of all heros with the specified attribute
      */
-    public List<Hero> getHerosByAttribute() {
-        return getMany(Hero.class, "hero_attribute");
+    public static List<Hero> getHerosByAttribute(HeroAttribute attribute) {
+        return new Select()
+                .from(Hero.class)
+                .where("hero_attribute = ?", attribute.getId())
+                .execute();
     }
 }

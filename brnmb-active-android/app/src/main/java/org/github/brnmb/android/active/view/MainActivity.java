@@ -35,8 +35,9 @@ public class MainActivity extends AppCompatActivity
      */
     final String[] fragments ={
             "org.github.brnmb.android.active.view.FragmentHerosAgility",
+            "org.github.brnmb.android.active.view.FragmentHerosStrength",
             "org.github.brnmb.android.active.view.FragmentHerosIntelligence",
-            "org.github.brnmb.android.active.view.FragmentHerosStrength"};
+            "org.github.brnmb.android.active.view.FragmentHome"};
 
     /**
      * {@inheritDoc}
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.main_fragment, Fragment.instantiate(MainActivity.this, fragments[1]));
+        tx.replace(R.id.main_fragment, Fragment.instantiate(MainActivity.this, fragments[3]));
         tx.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -134,21 +135,21 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_agility) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.main_fragment,Fragment.instantiate(MainActivity.this, fragments[0]));
             tx.commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_strength) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.main_fragment, Fragment.instantiate(MainActivity.this, fragments[1]));
             tx.commit();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_intelligence) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.main_fragment, Fragment.instantiate(MainActivity.this, fragments[2]));
             tx.commit();
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_home) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-            tx.replace(R.id.main_fragment,Fragment.instantiate(MainActivity.this, fragments[0]));
+            tx.replace(R.id.main_fragment,Fragment.instantiate(MainActivity.this, fragments[3]));
             tx.commit();
         } else if (id == R.id.nav_share) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
@@ -186,16 +187,5 @@ public class MainActivity extends AppCompatActivity
 
         List<HeroAttribute> storedAttributes = HeroAttribute.getAllAttributes();
         List<HeroRole> storedHeroRoles = HeroRole.getAllHeroRoles();
-
-        agility = new Select()
-                .from(HeroAttribute.class)
-                .where("hero_attribute_name = ?", agility.name)
-                .executeSingle();
-        List<Hero> storedAgiHeros = agility.getHerosByAttribute();
-        List<Hero> storedHeros = Hero.getAllHeros();
-        Log.v("Size", " " + storedAgiHeros.size());
-        Log.v("Size", " " + storedAttributes.size());
-        Log.v("Size", " " + storedHeroRoles.size());
-        Log.v("Size", " " + storedHeros.size());
     }
 }

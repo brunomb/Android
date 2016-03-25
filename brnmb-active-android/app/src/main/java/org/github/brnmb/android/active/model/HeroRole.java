@@ -59,7 +59,10 @@ public class HeroRole extends Model {
      *
      * @return List of all heros with the specified role
      */
-    public List<Hero> getHerosByAttribute() {
-        return getMany(Hero.class, "hero_role");
+    public static List<Hero> getHerosByAttribute(HeroRole role) {
+        return new Select()
+                .from(Hero.class)
+                .where("hero_role = ?", role.getId())
+                .execute();
     }
 }

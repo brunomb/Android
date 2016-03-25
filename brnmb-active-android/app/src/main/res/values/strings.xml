@@ -11,4 +11,8 @@
     <string name="agility_heros">Agility Heros</string>
     <string name="intelligence_heros">Intelligence Heros</string>
     <string name="strength_heros">Strength Heros</string>
+    <string name="agility">Agility</string>
+    <string name="strength">Strength</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="home">Home</string>
 </resources>

@@ -5,13 +5,26 @@
              android:background="#2e5cb8"
              tools:context="org.github.brnmb.android.active.view.FragmentHerosIntelligence">
 
-    <TextView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/intelligence_heros"/>
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/tv_heros_intelligence_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="3dp"
+                android:text="@string/intelligence_heros"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_heros_intelligence_title"
+                android:id="@+id/intelligence_hero_rv" />
+    </RelativeLayout>
 
 </FrameLayout>
