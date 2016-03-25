@@ -2,18 +2,20 @@ package org.github.brnmb.android.active.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import com.activeandroid.query.Select;
 import org.github.brnmb.android.active.R;
 import org.github.brnmb.android.active.model.Hero;
 import org.github.brnmb.android.active.model.HeroAttribute;
@@ -21,14 +23,24 @@ import org.github.brnmb.android.active.model.HeroRole;
 
 import java.util.List;
 
+/** MainActivity of the app
+ *
+ * @author Bruno Miranda Brandão
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * FragmentList
+     */
     final String[] fragments ={
             "org.github.brnmb.android.active.view.FragmentHerosAgility",
             "org.github.brnmb.android.active.view.FragmentHerosIntelligence",
             "org.github.brnmb.android.active.view.FragmentHerosStrength"};
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +80,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -80,6 +95,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -87,6 +105,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -105,6 +126,9 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -143,33 +167,35 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Insert some initial data o the Database
+     */
     public void prepareModel() {
         HeroAttribute strength = new HeroAttribute("Strength");
-        strength.save();
-        HeroAttribute agility = new HeroAttribute("agility");
-        agility.save();
-        HeroAttribute intelligence = new HeroAttribute("intelligence");
-        intelligence.save();
+        HeroAttribute agility = new HeroAttribute("Agility");
+        HeroAttribute intelligence = new HeroAttribute("Intelligence");
 
         HeroRole midLane = new HeroRole("Mid Lane");
-        midLane.save();
         HeroRole offLane = new HeroRole("Off Lane");
-        offLane.save();
         HeroRole safeLane = new HeroRole("Safe Lane");
-        safeLane.save();
 
         Hero axe = new Hero("Axe", strength, offLane);
-        axe.save();
         Hero puck = new Hero("Puck", intelligence, midLane);
-        puck.save();
         Hero nevermore = new Hero("Nevermore", agility, midLane);
-        nevermore.save();
         Hero magina = new Hero("Magina", agility, midLane);
-        magina.save();
 
-        List<HeroAttribute> storedAtrributes = HeroAttribute.getAllAtrributes();
+        List<HeroAttribute> storedAttributes = HeroAttribute.getAllAttributes();
         List<HeroRole> storedHeroRoles = HeroRole.getAllHeroRoles();
+
+        agility = new Select()
+                .from(HeroAttribute.class)
+                .where("hero_attribute_name = ?", agility.name)
+                .executeSingle();
         List<Hero> storedAgiHeros = agility.getHerosByAttribute();
         List<Hero> storedHeros = Hero.getAllHeros();
+        Log.v("Size", " " + storedAgiHeros.size());
+        Log.v("Size", " " + storedAttributes.size());
+        Log.v("Size", " " + storedHeroRoles.size());
+        Log.v("Size", " " + storedHeros.size());
     }
 }
