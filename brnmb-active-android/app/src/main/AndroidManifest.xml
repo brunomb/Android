@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="org.github.brnmb.android.active">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="org.github.brnmb.android.active">
 
     <application
             android:allowBackup="true"
@@ -22,6 +23,7 @@
             <!-- DataBase -->
             <meta-data android:name="AA_DB_NAME" android:value="DotaHeros.db" />
             <meta-data android:name="AA_DB_VERSION" android:value="0.1" />
+            <meta-data android:name="AA_SERIALIZERS" android:value="org.github.brnmb.android.active.model.ConsSerializer" />
         </activity>
     </application>
 

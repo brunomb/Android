@@ -1,5 +1,7 @@
 package org.github.brnmb.android.active.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,6 +49,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HeroViewHolder> {
     public void onBindViewHolder(HeroViewHolder holder, int position) {
         holder.personName.setText(heros.get(position).name);
         holder.personAge.setText(heros.get(position).heroAttribute.name);
+
+        Bitmap bitmap = BitmapFactory.decodeByteArray(heros.get(position).heroImage, 0, heros.get(position).heroImage.length);
+        holder.personPhoto.setImageBitmap(bitmap);
     }
 
     /**

@@ -39,6 +39,12 @@ public class Hero extends Model {
     public String cons;
 
     /**
+     * Hero image
+     */
+    @Column(name = "hero_image")
+    public byte[] heroImage;
+
+    /**
      * Get all heros on database
      *
      * @return List of all heros
@@ -59,11 +65,12 @@ public class Hero extends Model {
      * @param role Hero role
      *
      */
-    public Hero(String heroName, HeroAttribute attribute, HeroRole role){
+    public Hero(String heroName, HeroAttribute attribute, HeroRole role, byte[] image){
         super();
         this.name = heroName;
         this.heroAttribute = attribute;
         this.heroRole = role;
+        this.heroImage = image;
         String[] cons = new String[3];
         cons[0] = "a";
         cons[1] = "b";

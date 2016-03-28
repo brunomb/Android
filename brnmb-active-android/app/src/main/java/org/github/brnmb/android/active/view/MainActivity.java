@@ -1,5 +1,8 @@
 package org.github.brnmb.android.active.view;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,6 +24,7 @@ import org.github.brnmb.android.active.model.Hero;
 import org.github.brnmb.android.active.model.HeroAttribute;
 import org.github.brnmb.android.active.model.HeroRole;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /** MainActivity of the app
@@ -180,10 +184,19 @@ public class MainActivity extends AppCompatActivity
         HeroRole offLane = new HeroRole("Off Lane");
         HeroRole safeLane = new HeroRole("Safe Lane");
 
-        Hero axe = new Hero("Axe", strength, offLane);
-        Hero puck = new Hero("Puck", intelligence, midLane);
-        Hero nevermore = new Hero("Nevermore", agility, midLane);
-        Hero magina = new Hero("Magina", agility, midLane);
+        Drawable d = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            d = getDrawable(R.mipmap.ic_launcher);
+        }
+        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] bitMapData = stream.toByteArray();
+
+        Hero axe = new Hero("Axe", strength, offLane, bitMapData);
+        Hero puck = new Hero("Puck", intelligence, midLane, bitMapData);
+        Hero nevermore = new Hero("Nevermore", agility, midLane, bitMapData);
+        Hero magina = new Hero("Magina", agility, midLane, bitMapData);
 
         for (String con : axe.getCons()) {
             Log.v("<><><>", ">> " + con);
