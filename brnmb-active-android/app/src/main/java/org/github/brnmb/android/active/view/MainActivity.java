@@ -185,6 +185,10 @@ public class MainActivity extends AppCompatActivity
         Hero nevermore = new Hero("Nevermore", agility, midLane);
         Hero magina = new Hero("Magina", agility, midLane);
 
+        for (String con : axe.getCons()) {
+            Log.v("<><><>", ">> " + con);
+        }
+
         List<HeroAttribute> storedAttributes = HeroAttribute.getAllAttributes();
         List<HeroRole> storedHeroRoles = HeroRole.getAllHeroRoles();
     }

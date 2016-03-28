@@ -31,7 +31,8 @@ public class FragmentHerosStrength extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_heros_strength, null);
 
-        HeroAttribute strength = new HeroAttribute("Strength");
+        HeroAttribute strength;
+
         strength = new Select()
                 .from(HeroAttribute.class)
                 .where("hero_attribute_name = ?", "Strength")

@@ -1,13 +1,11 @@
 package org.github.brnmb.android.active.model;
 
-import android.util.Log;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
 import java.util.List;
-import java.util.jar.Attributes;
 
 /** Hero Attribute model
  *

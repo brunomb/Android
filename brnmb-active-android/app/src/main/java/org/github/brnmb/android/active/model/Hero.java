@@ -33,6 +33,12 @@ public class Hero extends Model {
     public HeroRole heroRole;
 
     /**
+     * Hero cons
+     */
+    @Column(name = "hero_cons")
+    public String cons;
+
+    /**
      * Get all heros on database
      *
      * @return List of all heros
@@ -58,6 +64,10 @@ public class Hero extends Model {
         this.name = heroName;
         this.heroAttribute = attribute;
         this.heroRole = role;
+        String[] cons = new String[3];
+        cons[0] = "a";
+        cons[1] = "b";
+        cons[2] = "c";
 
         Hero self = new Select()
                 .from(Hero.class)
@@ -65,12 +75,36 @@ public class Hero extends Model {
                 .executeSingle();
 
         if (self == null) {
+            this.setCons(cons);
             this.save();
         } else {
             self.name = heroName;
             self.heroAttribute = attribute;
             self.heroRole = heroRole;
+            this.setCons(cons);
             self.save();
         }
+    }
+
+    /**
+     * Set the hero counters, receives a list of string and serialize to a String
+     *
+     * @param heroCons Counters list
+     *
+     */
+    public void setCons(String[] heroCons) {
+        ConsSerializer serializer = new ConsSerializer();
+        this.cons = (String) serializer.serialize(heroCons);
+    }
+
+    /**
+     * Get the hero counters list
+     *
+     * @return Counters list
+     *
+     */
+    public String[] getCons() {
+        ConsSerializer serializer = new ConsSerializer();
+        return (String[]) serializer.deserialize(this.cons);
     }
 }
