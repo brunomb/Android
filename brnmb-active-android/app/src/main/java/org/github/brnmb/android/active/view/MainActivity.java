@@ -185,12 +185,14 @@ public class MainActivity extends AppCompatActivity
         HeroRole safeLane = new HeroRole("Safe Lane");
 
         Drawable d = null;
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             d = getDrawable(R.mipmap.ic_launcher);
         }
+
         Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
         byte[] bitMapData = stream.toByteArray();
 
         Hero axe = new Hero("Axe", strength, offLane, bitMapData);

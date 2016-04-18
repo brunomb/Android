@@ -19,10 +19,19 @@ import org.github.brnmb.android.active.model.HeroAttribute;
 import java.util.List;
 
 
+/**
+ * The type Fragment heros agility.
+ */
 public class FragmentHerosAgility extends Fragment {
 
     private RecyclerView agilityHerosRecyvlerView;
 
+    /**
+     * New instance fragment.
+     *
+     * @param context the context
+     * @return the fragment
+     */
     public static Fragment newInstance(Context context) {
         return new FragmentHerosAgility();
     }

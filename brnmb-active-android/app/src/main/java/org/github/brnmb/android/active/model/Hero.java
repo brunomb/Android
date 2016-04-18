@@ -1,5 +1,7 @@
 package org.github.brnmb.android.active.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -7,12 +9,13 @@ import com.activeandroid.query.Select;
 
 import java.util.List;
 
-/** Hero model
+/**
+ * Hero model
  *
  * @author Bruno Miranda Brandão
  */
 @Table(name = "heros")
-public class Hero extends Model {
+public class Hero extends Model implements Parcelable {
 
     /**
      * Hero name
@@ -36,13 +39,34 @@ public class Hero extends Model {
      * Hero cons
      */
     @Column(name = "hero_cons")
-    public String cons;
+    public String[] cons;
 
     /**
      * Hero image
      */
     @Column(name = "hero_image")
     public byte[] heroImage;
+
+    public static final Parcelable.Creator<Hero> CREATOR = new Creator<Hero>() {
+        @Override
+        public Hero createFromParcel(Parcel in) {
+            return new Hero(in);
+        }
+
+        @Override
+        public Hero[] newArray(int size) {
+            return new Hero[size];
+        }
+    };
+
+    public Hero(Parcel in) {
+        this.name = in.readString();
+        this.heroAttribute = in.readParcelable(HeroAttribute.class.getClassLoader());
+        this.heroRole = in.readParcelable(HeroRole.class.getClassLoader());
+//        this.cons = in.readString();
+        this.heroImage = new byte[in.readInt()];
+//        in.readByteArray(this.heroImage);
+    }
 
     /**
      * Get all heros on database
@@ -53,6 +77,9 @@ public class Hero extends Model {
         return new Select().from(Hero.class).execute();
     }
 
+    /**
+     * Instantiates a new Hero.
+     */
     public Hero() {
         super();
     }
@@ -60,10 +87,10 @@ public class Hero extends Model {
     /**
      * Hero constructor, IF the hero already exists then update ELSE create
      *
-     * @param heroName Hero name
+     * @param heroName  Hero name
      * @param attribute Hero primary attribute
-     * @param role Hero role
-     *
+     * @param role      Hero role
+     * @param image     the image
      */
     public Hero(String heroName, HeroAttribute attribute, HeroRole role, byte[] image){
         super();
@@ -71,6 +98,7 @@ public class Hero extends Model {
         this.heroAttribute = attribute;
         this.heroRole = role;
         this.heroImage = image;
+
         String[] cons = new String[3];
         cons[0] = "a";
         cons[1] = "b";
@@ -87,8 +115,9 @@ public class Hero extends Model {
         } else {
             self.name = heroName;
             self.heroAttribute = attribute;
-            self.heroRole = heroRole;
-            this.setCons(cons);
+            self.heroRole = role;
+            self.setCons(cons);
+            self.heroImage = image;
             self.save();
         }
     }
@@ -97,21 +126,32 @@ public class Hero extends Model {
      * Set the hero counters, receives a list of string and serialize to a String
      *
      * @param heroCons Counters list
-     *
      */
     public void setCons(String[] heroCons) {
-        ConsSerializer serializer = new ConsSerializer();
-        this.cons = (String) serializer.serialize(heroCons);
+        this.cons = heroCons;
     }
 
     /**
      * Get the hero counters list
      *
      * @return Counters list
-     *
      */
     public String[] getCons() {
-        ConsSerializer serializer = new ConsSerializer();
-        return (String[]) serializer.deserialize(this.cons);
+        return this.cons;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeParcelable(heroAttribute, flags);
+        dest.writeParcelable(heroRole, flags);
+//        dest.writeString(cons);
+        dest.writeInt(heroImage.length);
+        dest.writeByteArray(heroImage);
     }
 }

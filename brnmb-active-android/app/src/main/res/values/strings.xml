@@ -16,4 +16,8 @@
     <string name="intelligence">Intelligence</string>
     <string name="home">Home</string>
     <string name="image_description">Dota 2 logo</string>
+    <string name="dota_heros">Dota Heros</string>
+    <string name="profile">Profile</string>
+    <string name="name">Name</string>
+    <string name="attribute">Attribute</string>
 </resources>

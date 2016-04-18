@@ -3,6 +3,9 @@ package org.github.brnmb.android.active.utils;
 import android.content.res.Configuration;
 import com.activeandroid.ActiveAndroid;
 
+/**
+ * The type My application.
+ */
 public class MyApplication extends com.activeandroid.app.Application {
 
     @Override

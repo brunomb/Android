@@ -4,8 +4,9 @@ import android.util.Log;
 import com.activeandroid.serializer.TypeSerializer;
 import com.google.gson.Gson;
 
-/** ConsSerializer
- *
+/**
+ * ConsSerializer
+ * <p/>
  * Serialize list of hero counters as Strings
  *
  * @author Bruno Miranda Brandão

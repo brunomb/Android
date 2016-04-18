@@ -12,6 +12,13 @@
             android:textColor="#cc0000"
             android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="@string/intelligence_heros"/>
+            android:text="@string/dota_heros"/>
 
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:text="@string/profile"
+            android:id="@+id/button_profile"
+            android:layout_gravity="center"/>
 </FrameLayout>
