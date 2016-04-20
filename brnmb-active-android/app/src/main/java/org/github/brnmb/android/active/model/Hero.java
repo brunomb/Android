@@ -30,12 +30,6 @@ public class Hero extends Model implements Parcelable {
     public HeroAttribute heroAttribute;
 
     /**
-     * Role of the hero
-     */
-    @Column(name = "hero_role")
-    public HeroRole heroRole;
-
-    /**
      * Hero cons
      */
     @Column(name = "hero_cons")
@@ -62,7 +56,6 @@ public class Hero extends Model implements Parcelable {
     public Hero(Parcel in) {
         this.name = in.readString();
         this.heroAttribute = in.readParcelable(HeroAttribute.class.getClassLoader());
-        this.heroRole = in.readParcelable(HeroRole.class.getClassLoader());
 //        this.cons = in.readString();
         this.heroImage = new byte[in.readInt()];
 //        in.readByteArray(this.heroImage);
@@ -89,14 +82,12 @@ public class Hero extends Model implements Parcelable {
      *
      * @param heroName  Hero name
      * @param attribute Hero primary attribute
-     * @param role      Hero role
      * @param image     the image
      */
-    public Hero(String heroName, HeroAttribute attribute, HeroRole role, byte[] image){
+    public Hero(String heroName, HeroAttribute attribute, byte[] image){
         super();
         this.name = heroName;
         this.heroAttribute = attribute;
-        this.heroRole = role;
         this.heroImage = image;
 
         String[] cons = new String[3];
@@ -115,7 +106,6 @@ public class Hero extends Model implements Parcelable {
         } else {
             self.name = heroName;
             self.heroAttribute = attribute;
-            self.heroRole = role;
             self.setCons(cons);
             self.heroImage = image;
             self.save();
@@ -149,7 +139,6 @@ public class Hero extends Model implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeParcelable(heroAttribute, flags);
-        dest.writeParcelable(heroRole, flags);
 //        dest.writeString(cons);
         dest.writeInt(heroImage.length);
         dest.writeByteArray(heroImage);

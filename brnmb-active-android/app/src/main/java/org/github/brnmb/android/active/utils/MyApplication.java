@@ -1,5 +1,6 @@
 package org.github.brnmb.android.active.utils;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import com.activeandroid.ActiveAndroid;
 
@@ -7,6 +8,8 @@ import com.activeandroid.ActiveAndroid;
  * The type My application.
  */
 public class MyApplication extends com.activeandroid.app.Application {
+
+    private static Context context;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -16,7 +19,12 @@ public class MyApplication extends com.activeandroid.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         ActiveAndroid.initialize(this);
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 
     @Override

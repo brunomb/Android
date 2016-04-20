@@ -19,7 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import com.activeandroid.query.Select;
+import org.github.brnmb.android.active.BuildConfig;
 import org.github.brnmb.android.active.R;
+import org.github.brnmb.android.active.enums.HeroRoleEnum;
+import org.github.brnmb.android.active.exceptions.NoDataException;
 import org.github.brnmb.android.active.model.Hero;
 import org.github.brnmb.android.active.model.HeroAttribute;
 import org.github.brnmb.android.active.model.HeroRole;
@@ -53,7 +56,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        prepareModel();
+        if (BuildConfig.DATA) {
+            prepareModel();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
@@ -180,12 +185,7 @@ public class MainActivity extends AppCompatActivity
         HeroAttribute agility = new HeroAttribute("Agility");
         HeroAttribute intelligence = new HeroAttribute("Intelligence");
 
-        HeroRole midLane = new HeroRole("Mid Lane");
-        HeroRole offLane = new HeroRole("Off Lane");
-        HeroRole safeLane = new HeroRole("Safe Lane");
-
         Drawable d = null;
-
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             d = getDrawable(R.mipmap.ic_launcher);
         }
@@ -195,16 +195,23 @@ public class MainActivity extends AppCompatActivity
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
         byte[] bitMapData = stream.toByteArray();
 
-        Hero axe = new Hero("Axe", strength, offLane, bitMapData);
-        Hero puck = new Hero("Puck", intelligence, midLane, bitMapData);
-        Hero nevermore = new Hero("Nevermore", agility, midLane, bitMapData);
-        Hero magina = new Hero("Magina", agility, midLane, bitMapData);
+        Hero axe = new Hero("Axe", strength, bitMapData);
+        Hero puck = new Hero("Puck", intelligence, bitMapData);
+        Hero nevermore = new Hero("Nevermore", agility, bitMapData);
+        Hero magina = new Hero("Magina", agility, bitMapData);
 
-        for (String con : axe.getCons()) {
-            Log.v("<><><>", ">> " + con);
-        }
+        new HeroRole(HeroRoleEnum.MID_LANE, axe);
+
+        Log.e("DEBUG 0","DEBUG 0");
 
         List<HeroAttribute> storedAttributes = HeroAttribute.getAllAttributes();
-        List<HeroRole> storedHeroRoles = HeroRole.getAllHeroRoles();
+        try {
+            List<HeroRole> storedHeroRoles = HeroRole.getAllHeroRoles();
+            Log.e("v", "AASDWED" + storedHeroRoles.size());
+        } catch (NoDataException e) {
+            Log.e("Error", e.getMessage());
+        }
+
+        Log.e("DEBUG 1","DEBUG 1");
     }
 }

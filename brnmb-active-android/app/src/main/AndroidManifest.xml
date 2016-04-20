@@ -30,7 +30,8 @@
                     android:value="0.1"/>
             <meta-data
                     android:name="AA_SERIALIZERS"
-                    android:value="org.github.brnmb.android.active.model.ConsSerializer"/>
+                    android:value="org.github.brnmb.android.active.model.serializer.ConsSerializer,
+                                   org.github.brnmb.android.active.model.serializer.HeroRoleSerializer"/>
         </activity>
         <activity android:name=".view.HeroProfile">
         </activity>

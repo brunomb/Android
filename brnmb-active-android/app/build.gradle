@@ -17,6 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        data {
+            buildConfigField 'boolean', 'DATA', 'true'
+        }
+        nodata {
+            buildConfigField 'boolean', 'DATA', 'false'
+        }
+    }
 }
 
 dependencies {

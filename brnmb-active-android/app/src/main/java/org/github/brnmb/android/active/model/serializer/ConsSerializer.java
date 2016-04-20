@@ -1,16 +1,16 @@
-package org.github.brnmb.android.active.model;
+package org.github.brnmb.android.active.model.serializer;
 
-import android.util.Log;
 import com.activeandroid.serializer.TypeSerializer;
 import com.google.gson.Gson;
 
 /**
  * ConsSerializer
- * <p/>
+ *
  * Serialize list of hero counters as Strings
  *
  * @author Bruno Miranda Brandão
  */
+@SuppressWarnings("unused")
 public class ConsSerializer extends TypeSerializer {
 
     /**
@@ -45,11 +45,7 @@ public class ConsSerializer extends TypeSerializer {
             return null;
         }
 
-        final String serializedObject = gson.toJson(object);
-
-        Log.i("Json", " " + serializedObject);
-
-        return serializedObject;
+        return gson.toJson(object);
     }
 
     /**
