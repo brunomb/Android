@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JenkinsTestProject</string>
+    <string name="just_a_test_application">Just a test application</string>
+</resources>
